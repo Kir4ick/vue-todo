@@ -1,30 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div class="wrapper">
+    <confirm-dialog></confirm-dialog>
+    <suspense>
+        <router-view>
+        </router-view>
+    </suspense>
+</div>
 </template>
 
 <style>
+body {
+    background: #42b983;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+    width: 100%;
+    padding: 0px 20px;
+    word-break: break-all;
 }
 
-nav {
-  padding: 30px;
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.wrapper {
+    background: white;
+    margin: 0px auto;
+    margin-top: 60px;
+    max-width: 800px;
+    border-radius: 30px;
+    padding: 20px 30px;
 }
 </style>
+
+<script setup>
+import ConfirmDialog from "@/components/ui/ConfirmDialog.vue";
+</script>
