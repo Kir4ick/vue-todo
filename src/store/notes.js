@@ -1,4 +1,4 @@
-import {reactive, watch} from "vue";
+import {reactive, ref, watch} from "vue";
 import {getNotes, setNotes} from "@/utils/notes";
 
 const noteList = reactive(getNotes())
@@ -23,9 +23,9 @@ export function removeNote (index) {
     noteList.splice(index, 1)
 }
 
-export function getNoteByName(name) {
+export function getNoteById(id) {
     for (const taskKey in noteList) {
-        if (noteList[taskKey].name !== name) {
+        if (noteList[taskKey].id != id) {
             continue
         }
 

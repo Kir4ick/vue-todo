@@ -6,13 +6,15 @@
 
 <template>
     <teleport to="body">
-        <div class="dialog-wrapper" v-if="isOpen">
+        <div class="dialog-wrapper" v-if="isOpen" @click.self="isOpen = false">
             <div class="dialog-body">
                 <div>
-                    Вы увкерены?
+                    Вы уверены?
                 </div>
-                <button @click="isConfirm = true">Да</button>
-                <button @click="isOpen = false">Нет</button>
+                <div class="buttons-wrapper">
+                    <button class="save-button" @click="isConfirm = true">Да</button>
+                    <button class="danger-button" @click="isOpen = false">Нет</button>
+                </div>
             </div>
         </div>
     </teleport>
@@ -30,5 +32,11 @@
 .dialog-body {
     background: white;
     padding: 20px;
+}
+
+.buttons-wrapper {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
 }
 </style>

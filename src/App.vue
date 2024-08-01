@@ -37,6 +37,10 @@ body {
     border-radius: 30px;
     padding: 20px 30px;
 }
+
+.title {
+    text-align: center;
+}
 </style>
 
 <script setup>

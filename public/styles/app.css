@@ -1,0 +1,35 @@
+.danger-button {
+    background: #ce3a3a;
+    color: white;
+}
+
+.save-button {
+    background: #0e80c7;
+    color: white;
+}
+
+.yellow-button {
+    background: #f6ea4e;
+    color: white;
+}
+
+button {
+    transition: 0.3s ease all;
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-button:hover {
+    background: #1e4b7e;
+}
+
+.danger-button:hover {
+    background: #6b0707;
+}
+
+.yellow-button:hover {
+    background: #8a820d;
+}

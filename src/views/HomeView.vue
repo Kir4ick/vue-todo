@@ -1,8 +1,10 @@
 <script setup>
     import CreateForm from "@/components/layouts/create-form/CreateForm.vue";
     import {confirmed} from "@/utils/confirmed";
-    import {createNewTask, getNoteList, removeNote} from "@/store/tasks";
+    import {createNewTask, getNoteList, removeNote} from "@/store/notes";
     import {MAX_TODO_IN_MAIN_PAGE} from "@/constants/todo";
+    import TaskItem from "@/components/layouts/TaskItem.vue";
+    import TaskRaw from "@/components/layouts/TaskRaw.vue";
     
     const noteList = getNoteList()
     
@@ -13,27 +15,32 @@
 
 <template>
     <div class="home">
-        <h1>Лучший TODO сервис</h1>
+        <h1 class="title">Лучший TODO сервис</h1>
         <div class="create-form-wrapper">
-            <CreateForm @submit="createNewTask"></CreateForm>
+            <CreateForm
+                placeholder="Введите название заметки"
+                @submit="createNewTask"
+            >
+            </CreateForm>
         </div>
         <div class="notes-wrapper">
             <div class="note-item" v-for="(note, index) of noteList">
                 <div class="task-data">
                     <span>
                         Заметка:
-                        <router-link :to="{ name: 'task', params: { name: note.name }}">
+                        <router-link :to="{ name: 'task', params: { id: note.id }}">
                             {{ note.name }}
                         </router-link>
                     </span>
                     <div class="todo-wrapper">
-                        <div style="display: flex" v-for="(todo, taskIndex) of note.taskList.slice(0, MAX_TODO_IN_MAIN_PAGE)">
-                            <!--                    <input v-if="todo.state === 'new'" @change="updateTodoState(index, taskIndex)" type="checkbox" >-->
-                            <div>{{ todo.name }}</div>
-                        </div>
+                        <task-raw :task="task" :editable="false" v-for="task of note.taskList.slice(0, MAX_TODO_IN_MAIN_PAGE)">
+                            <task-item
+                                :task="task"
+                            ></task-item>
+                        </task-raw>
                     </div>
                 </div>
-                <button @click="confirmed(removeNote, index)">
+                <button class="danger-button" @click="confirmed(removeNote, index)">
                     удалить
                 </button>
             </div>
@@ -41,14 +48,14 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .create-form-wrapper {
         margin-top: 20px;
     }
     
     .notes-wrapper {
         text-align: left;
-        margin-top: 30px;
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -60,15 +67,6 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-    }
-    
-    .note-item button {
-        padding: 8px 15px;
-        background: #ce3a3a;
-        border: none;
-        cursor: pointer;
-        color: white;
-        border-radius: 10px;
     }
     
     .note-item a {
